@@ -25,7 +25,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'elasticsearch-rails'
 gem 'elasticsearch-model'
-
+gem 'pg'
+gem 'mysql2'
 gem 'pry-byebug'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
