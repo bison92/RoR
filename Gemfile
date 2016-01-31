@@ -33,6 +33,7 @@ gem 'pry-byebug'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
+gem "codeclimate-test-reporter", group: :test, require: nil
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
