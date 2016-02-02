@@ -1,19 +1,53 @@
 <h1>Listing articles</h1>
-<%= link_to 'New article', new_article_path %>, 
-<%= link_to 'Search', search_article_path %>
-<table>
+<nav class="navbar navbar-default navbar-inverse">
+	<div class="container-fluid">
+	  <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+			<li><%= link_to 'New article', new_article_path %></li>
+		</ul>
+      	<%= form_for articles_path, method: :get, html: {class: "navbar-form navbar-left", role:"search"} do |f| %>
+  		<div class="form-group">
+    		<%= text_field_tag :q, params[:q], :class => "form-control", :placeholder => "Search" %>
+		</div>
+    	<%= submit_tag "Submit", name: nil, :class => "btn btn-default" %>
+    	<% end %>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<table class="table">
 	<thead>
 		<tr>
-			<td>Title</td>
-			<td>Text</td>
+			<th>Title</th>
+			<th>Text</th>
+			<th><span class="glyphicon glyphicon-search"></span></th>
+			<th><span class="glyphicon glyphicon-pencil"></span></th>
 		</tr>
 	</thead>
 	<tbody>
+		<% if @articles.count == 0 %>
+			<tr>
+				<td colspan="4">No results found.</td>
+			</tr>
+		<% else %>
 		<% @articles.each do |article| %>
 		<tr>
-			<td><%= article.title %></td>
+			<td><%= link_to article.title, article_path(article) %></td>
 			<td><%= article.text %></td>
+			<td><%= link_to 'Show', article_path(article.id), { class: "btn btn-primary" } %></td>
+      		<td><%= link_to 'Edit', edit_article_path(article.id), { class: "btn btn-warning" } %></td>
 		</tr>
+		<% end %>
 		<% end %>
 	</tbody>
 </table>
